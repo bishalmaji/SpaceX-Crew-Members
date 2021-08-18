@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SpaceX Crew Members</string>
+    <string name="image">_image</string>
+    <string name="name">Name :</string>
+    <string name="agency">Agency :</string>
+    <string name="wikipedia">Wikipedia :</string>
+    <string name="status">Status :</string>
+</resources>
