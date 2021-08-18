@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.bishal.datafrominternet.adapter.CrewAdapter;
 import com.bishal.datafrominternet.database.AppDatabase;
@@ -23,12 +25,34 @@ public class MainActivity extends AppCompatActivity implements CrewAdapter.ItemC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db  = AppDatabase.getDbInstance(this.getApplicationContext());
+        Button refresh = findViewById(R.id.btn_refresh);
+        Button delete = findViewById(R.id.btn_delete);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter =  new CrewAdapter(this, crewModelList, this);
         recyclerView.setAdapter(adapter);
+        db=AppDatabase.getDbInstance(this.getApplicationContext());
+        observerMethod();
+        loadUserList();
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Data Refreshed", Toast.LENGTH_SHORT).show();
+          observerMethod();
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.userDao().delete();
+                adapter.clear();
+                Toast.makeText(MainActivity.this, "Data Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void observerMethod() {
         CrewViewModel viewModel = ViewModelProviders.of(this).get(CrewViewModel.class);
         viewModel.getMoviesListObserver().observe(this, new Observer<List<CrewModel>>() {
             @Override
@@ -39,14 +63,12 @@ public class MainActivity extends AppCompatActivity implements CrewAdapter.ItemC
                         db.userDao().insertUser(crewModels);
                         loadUserList();
                     }
-                } else {
-                    Toast.makeText(MainActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         viewModel.makeApiCall();
-        loadUserList();
     }
+
     private void loadUserList() {
         AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
         crewModelList =db.userDao().getAllUsers();

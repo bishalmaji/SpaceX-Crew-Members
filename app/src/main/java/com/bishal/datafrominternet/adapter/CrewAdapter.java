@@ -27,6 +27,10 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.MyViewHolder> 
         this.movieList = movieList;
         this.clickListener = clickListener;
     }
+    public void clear(){
+     movieList.clear();
+     notifyDataSetChanged();
+    }
 
     public void setMovieList(List<CrewModel> movieList) {
         this.movieList = movieList;
