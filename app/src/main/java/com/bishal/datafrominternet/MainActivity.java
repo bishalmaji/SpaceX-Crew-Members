@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements CrewAdapter.ItemC
     private void loadUserList() {
         AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
         crewModelList =db.userDao().getAllUsers();
-        adapter.setMovieList(crewModelList);
+        adapter.setCrewList(crewModelList);
     }
     @Override
     public void onMovieClick(CrewModel movie) {

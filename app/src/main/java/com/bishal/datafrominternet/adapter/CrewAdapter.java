@@ -19,53 +19,53 @@ import java.util.List;
 
 public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.MyViewHolder> {
     private Context context;
-    private List<CrewModel> movieList;
+    private List<CrewModel> crewList;
     private ItemClickListener clickListener;
 
-    public CrewAdapter(Context context, List<CrewModel> movieList, ItemClickListener clickListener) {
+    public CrewAdapter(Context context, List<CrewModel> crewList, ItemClickListener clickListener) {
         this.context = context;
-        this.movieList = movieList;
+        this.crewList = crewList;
         this.clickListener = clickListener;
     }
     public void clear(){
-     movieList.clear();
+     crewList.clear();
      notifyDataSetChanged();
     }
 
-    public void setMovieList(List<CrewModel> movieList) {
-        this.movieList = movieList;
+    public void setCrewList(List<CrewModel> crewList) {
+        this.crewList = crewList;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recycler_row, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.crew_row, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.crew_name.setText(movieList.get(position).getName());
-        holder.crew_agency.setText(movieList.get(position).getAgency());
-        holder.crew_wikipedia.setText(movieList.get(position).getWikipedia());
-        holder.crew_status.setText(movieList.get(position).getStatus());
+        holder.crew_name.setText(crewList.get(position).getName());
+        holder.crew_agency.setText(crewList.get(position).getAgency());
+        holder.crew_wikipedia.setText(crewList.get(position).getWikipedia());
+        holder.crew_status.setText(crewList.get(position).getStatus());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickListener.onMovieClick(movieList.get(position));
+                clickListener.onMovieClick(crewList.get(position));
             }
         });
         Glide.with(context)
-                .load(this.movieList.get(position).getImage())
+                .load(this.crewList.get(position).getImage())
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        if(this.movieList != null) {
-            return this.movieList.size();
+        if(this.crewList != null) {
+            return this.crewList.size();
         }
         return 0;
     }
