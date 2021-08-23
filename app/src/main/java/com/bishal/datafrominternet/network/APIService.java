@@ -11,5 +11,5 @@ import retrofit2.http.GET;
 public interface APIService {
 
     @GET("v4/crew")
-    Call<List<CrewModel>> getMovieList();
+    Call<List<CrewModel>> getCrewList();
 }

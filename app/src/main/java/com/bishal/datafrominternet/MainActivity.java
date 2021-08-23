@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements CrewAdapter.ItemC
 
     private void observerMethod() {
         CrewViewModel viewModel = ViewModelProviders.of(this).get(CrewViewModel.class);
-        viewModel.getMoviesListObserver().observe(this, new Observer<List<CrewModel>>() {
+        viewModel.getCrewListObserver().observe(this, new Observer<List<CrewModel>>() {
             @Override
             public void onChanged(List<CrewModel> crewModels) {
                 if(crewModels != null) {
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements CrewAdapter.ItemC
         adapter.setCrewList(crewModelList);
     }
     @Override
-    public void onMovieClick(CrewModel movie) {
-        Toast.makeText(this, "Crew Name : " +movie.getName(), Toast.LENGTH_SHORT).show();
+    public void onMovieClick(CrewModel crewModel) {
+        Toast.makeText(this, "Crew Name : " +crewModel.getName(), Toast.LENGTH_SHORT).show();
     }
 }

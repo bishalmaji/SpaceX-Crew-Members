@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetroInstance {
 
 
-    public static String BASE_URL = "https://api.spacexdata.com/";//volley_array.json
+    public static String BASE_URL = "https://api.spacexdata.com/";
 
     private static Retrofit retrofit;
 

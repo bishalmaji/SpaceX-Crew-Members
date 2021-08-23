@@ -23,14 +23,14 @@ public class CrewViewModel extends ViewModel {
         crewList = new MutableLiveData<>();
     }
 
-    public MutableLiveData<List<CrewModel>> getMoviesListObserver() {
+    public MutableLiveData<List<CrewModel>> getCrewListObserver() {
         return crewList;
 
     }
 
     public void makeApiCall() {
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
-        Call<List<CrewModel>> call = apiService.getMovieList();
+        Call<List<CrewModel>> call = apiService.getCrewList();
         call.enqueue(new Callback<List<CrewModel>>() {
             @Override
             public void onResponse(Call<List<CrewModel>> call, Response<List<CrewModel>> response) {
